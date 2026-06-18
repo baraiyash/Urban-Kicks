@@ -1,0 +1,68 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build Folders
+bin/
+obj/
+
+# Visual Studio Code settings
+.vscode/
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Resharper
+_ReSharper*/
+*__Resharper*
+_ReSharper*/
+
+# MSTest test results
+TestResults/
+
+# NCrunch
+*.ncrunch*
+
+# EF migrations
+**/Migrations/**
+
+# Rider
+.idea/
+
+# Publish outputs
+*.Publish.xml
+
+# Logs
+*.log
+
+# Windows image file caches
+Thumbs.db
+
+# User-specific files
+*.userprefs
+
+# Others
+*.cache
+*.pdb
+
+# Ignore packages folder created by older NuGet versions
+packages/
+
+# Node modules (if any frontend)
+node_modules/
+
+# DotCover
+*.dotCover
+
+# JetBrains Rider
+.idea/
+
+# Local DB
+*.mdf
+*.ldf

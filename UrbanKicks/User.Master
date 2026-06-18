@@ -1,0 +1,401 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.master.cs" Inherits="UrbanKicks.User" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+
+    <title>Urban Kicks</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .top-bar {
+                background: lightgray;
+                text-align: center;
+                padding: 10px 0;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .flag-icons {
+                display: inline-block;
+                margin-left: 10px;
+            }
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            .menu-icon {
+                font-size: 24px;
+                cursor: pointer;
+            }
+            .nav-links {
+                text-decoration: none;
+                color: black;
+                list-style: none;
+                display: flex;
+                gap: 30px;
+                padding: 0;
+                margin: 0;
+            }
+            a {
+                color: black;
+                text-decoration: none;
+            }
+            a:hover {
+                color: red;
+            }
+            .nav-links li {
+                cursor: pointer;
+                transition: color 0.3s ease;    
+            }
+            .nav-links li:hover {
+                color: green;
+            }
+            .icons span {
+                margin-left: 10px;
+                cursor: pointer;
+            }
+             footer {
+                background-color: lightgray;
+                padding: 20px 0;
+             }
+
+             .admin-button {
+                margin-right: 20px; /* Spacing from left side */
+            }
+            .admin-button a {
+                background-color: black;
+                color: white;
+                padding: 8px 15px;
+                border-radius: 5px;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            .admin-button a:hover {
+                background-color: red;
+            }
+
+            /* Main Footer Container */
+            .footer-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between; /* Keeps left and right sections at equal distance */
+                max-width: 1200px;
+                margin: auto;
+            }
+
+            /* Center the INFO section */
+            .footer-info {
+                flex: 1; /* Makes it take equal space and center automatically */
+                text-align: center;
+            }
+
+            /* Keep left and right sections at equal distance */
+            .footer-left,
+            .footer-right {
+                width: 250px; /* Ensures both sections stay equal */
+                text-align: center;
+                font-size: 25px;
+            }
+
+            .footer-right {
+                width: 250px; 
+                text-align: center;
+                font-size: 25px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center; /* Centers content vertically */
+                align-items: center; /* Centers content horizontally */
+                height: 100%; /* Ensures it takes full height */
+            }
+
+                .footer-right h3 {
+                    padding-top: 20px;
+                }
+
+            /* Logo Styling */
+            .footer-left img {
+                width: 300px;
+                display: block;
+                margin-top: 50px;
+            }
+
+            /* Footer Bottom Section */
+            .footer-bottom {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+
+            .cart-link {
+                display: inline-block;
+                padding: 10px; /* Increase click area */
+                text-decoration: none;
+             }
+
+            .cart-icon svg {
+                cursor: pointer; /* Show pointer on hover */
+            }
+            .cart-count {
+                background: red;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                border-radius: 50%;
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: none; /* Initially hidden */
+            }
+            .welcome-label {
+                font-size: 16px;
+                font-weight: bold;
+                color: #000;
+                white-space: nowrap;
+            }
+            .header-container {
+                display: flex;
+                align-items: center;
+                margin-left : 200px;
+                justify-content: space-between; /* Space between navbar and right section */
+                width: 70%;
+            }
+            .right-section {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                
+            }
+            .nav-links {
+                list-style: none;
+                padding: 0;
+                margin: 0 auto;  /* Center horizontally */
+                display: flex;
+                gap: 20px; /* Space between items */
+            }
+            .footer-info ul {
+                list-style: none; /* Removes bullet points */
+                padding: 0; /* Removes default padding */
+                margin: 0; /* Removes extra spacing */
+            }
+            .cart-icon {
+                position: relative;
+                display: inline-block;
+            }
+
+            .cart-count {
+                position: absolute;
+                top: -8px;
+                right: -10px;
+                background-color: black;
+                color: white;
+                font-size: 10px;
+                font-weight: bold;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    min-width: 140px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    border-radius: 5px;
+    text-align: left;
+    padding: 10px 0;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+}
+
+/* Dropdown links */
+.dropdown-content a:hover {
+      background:#e4e0e0;     
+}
+
+/* Image styling */
+.dropdown-icon {
+    width: 20px; /* Adjust size as needed */
+    height: 20px;
+    opacity: 1; /* Hide by default */
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+ }
+           
+        </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+       <form id="form1" runat="server">
+    <!-- HEADER -->
+    <header>
+        <div class="top-bar">
+            <div class="flag-icons">
+                <a href="Index.aspx"><img src="images/logo8-without-bg.png" alt="Urban Kicks Logo" height="70px"></a>
+                
+            </div>
+        </div>
+        <nav>
+
+           <%-- <div class="checkout">  
+                <asp:Button ID="Button1" runat="server" Text="Admin" CssClass="checkout-btn"/>
+           </div>--%>
+
+          
+
+
+            <div class="header-container"> 
+                <ul class="nav-links">
+                    <li><a href="Nike.aspx"><b>NIKE</b></a></li>
+                    <li><a href="Adidas.aspx"><b>ADIDAS</b></a></li>
+                    <li><a href="Asics.aspx"><b>ASICS</b></a></li>
+                    <li><a href="NewBalance.aspx"><b>NEW BALANCE</b></a></li>
+                    <li><a href="Converse.aspx"><b>CONVERSE</b></a></li>
+                </ul>
+            </div>
+
+            <div class="right-section">
+                <!-- Welcome Label -->
+                 <asp:Label ID="lblWelcome" runat="server" CssClass="welcome-label" Visible="false"></asp:Label>
+
+            <!-- Icons -->
+    
+                <%--<a href='SignIn.aspx?returnUrl=<%= Request.Url.AbsolutePath %>'>
+                    <div class="icons">
+                        <span class="custom-icon">
+                        <svg width="25" height="25" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" id="svgkp">
+                            <path d="M22.9129 12.935L13.7571 23.0474C13.5348 23.2929 13.1284 23.1084 13.1669 22.7794L14.0816 14.9731H10.6991C10.4034 14.9731 10.2484 14.6219 10.4478 14.4035L20.3133 3.59739C20.5589 3.32834 20.9984 3.58134 20.8891 3.92887L18.2354 12.3664H22.6607C22.9557 12.3664 23.1109 12.7163 22.9129 12.935Z" fill="#FEA203"></path>
+                            <path id="svgkp-path" fill-rule="evenodd" clip-rule="evenodd" d="M16.6079 5.35819C16.4805 5.1933 16.3421 5.03582 16.1932 4.8869C15.2702 3.96387 14.0183 3.44531 12.7129 3.44531C11.4075 3.44531 10.1556 3.96387 9.2326 4.8869C8.30957 5.80993 7.79102 7.06183 7.79102 8.36719C7.79102 9.67255 8.30957 10.9244 9.2326 11.8475C9.48368 12.0986 9.75909 12.3197 10.0533 12.5086L11.0235 11.4503C10.7335 11.2914 10.4649 11.0911 10.227 10.8531C9.56766 10.1938 9.19727 9.29959 9.19727 8.36719C9.19727 7.43479 9.56766 6.54057 10.227 5.88127C10.8863 5.22196 11.7805 4.85156 12.7129 4.85156C13.6453 4.85156 14.5395 5.22196 15.1988 5.88127C15.3636 6.04604 15.5103 6.22549 15.6377 6.41654L16.6079 5.35819ZM20.6413 18.6497L19.6746 19.7132C20.1676 20.4122 20.4473 21.2264 20.4473 22.0781V23.8359C20.4473 24.2243 20.7621 24.5391 21.1504 24.5391C21.5387 24.5391 21.8535 24.2243 21.8535 23.8359V22.0781C21.8535 20.7863 21.4016 19.6103 20.6413 18.6497ZM12.3111 17.5078H10.3026C7.27113 17.5078 4.97852 19.6394 4.97852 22.0781V23.8359C4.97852 24.2243 4.66372 24.5391 4.27539 24.5391C3.88707 24.5391 3.57227 24.2243 3.57227 23.8359V22.0781C3.57227 18.6922 6.67684 16.1016 10.3026 16.1016H12.4885L12.3111 17.5078Z" fill="currentColor" stroke="currentColor"></path>
+                        </svg>
+                    </span>
+                </a>--%>
+
+             <div class="dropdown">
+            <div class="icons">
+                <span class="custom-icon">
+                    <svg width="25" height="25" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" id="svgkp">
+                        <path d="M22.9129 12.935L13.7571 23.0474C13.5348 23.2929 13.1284 23.1084 13.1669 22.7794L14.0816 14.9731H10.6991C10.4034 14.9731 10.2484 14.6219 10.4478 14.4035L20.3133 3.59739C20.5589 3.32834 20.9984 3.58134 20.8891 3.92887L18.2354 12.3664H22.6607C22.9557 12.3664 23.1109 12.7163 22.9129 12.935Z" fill="#FEA203"></path>
+                        <path id="svgkp-path" fill-rule="evenodd" clip-rule="evenodd" d="M16.6079 5.35819C16.4805 5.1933 16.3421 5.03582 16.1932 4.8869C15.2702 3.96387 14.0183 3.44531 12.7129 3.44531C11.4075 3.44531 10.1556 3.96387 9.2326 4.8869C8.30957 5.80993 7.79102 7.06183 7.79102 8.36719C7.79102 9.67255 8.30957 10.9244 9.2326 11.8475C9.48368 12.0986 9.75909 12.3197 10.0533 12.5086L11.0235 11.4503C10.7335 11.2914 10.4649 11.0911 10.227 10.8531C9.56766 10.1938 9.19727 9.29959 9.19727 8.36719C9.19727 7.43479 9.56766 6.54057 10.227 5.88127C10.8863 5.22196 11.7805 4.85156 12.7129 4.85156C13.6453 4.85156 14.5395 5.22196 15.1988 5.88127C15.3636 6.04604 15.5103 6.22549 15.6377 6.41654L16.6079 5.35819ZM20.6413 18.6497L19.6746 19.7132C20.1676 20.4122 20.4473 21.2264 20.4473 22.0781V23.8359C20.4473 24.2243 20.7621 24.5391 21.1504 24.5391C21.5387 24.5391 21.8535 24.2243 21.8535 23.8359V22.0781C21.8535 20.7863 21.4016 19.6103 20.6413 18.6497ZM12.3111 17.5078H10.3026C7.27113 17.5078 4.97852 19.6394 4.97852 22.0781V23.8359C4.97852 24.2243 4.66372 24.5391 4.27539 24.5391C3.88707 24.5391 3.57227 24.2243 3.57227 23.8359V22.0781C3.57227 18.6922 6.67684 16.1016 10.3026 16.1016H12.4885L12.3111 17.5078Z" fill="currentColor" stroke="currentColor"></path>
+                    </svg>
+                </span>
+            </div>
+       <div class="dropdown-content" s>
+            <a href="LoginAdmin.aspx" style:>
+                 <i class="fa fa-user"></i> Admin
+            </a>
+            <a href="SignIn.aspx">
+                <i class="fas fa-users"></i> User
+            </a>
+        </div>
+
+    </div>
+
+
+
+               <a href="Cart.aspx" class="cart-link">
+                <span class="cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 17.952 19.875">
+                        <g id="bag" transform="translate(-2.25 -1.125)">
+                            <path id="Path_2" data-name="Path 2" d="M18.919,10.282H3.532v11.54A1.282,1.282,0,0,0,4.815,23.1H17.637a1.282,1.282,0,0,0,1.282-1.282ZM2.25,9V21.823a2.565,2.565,0,0,0,2.565,2.565H17.637A2.565,2.565,0,0,0,20.2,21.823V9Z" transform="translate(0 -3.387)" fill-rule="evenodd"></path>
+                            <path id="Path_3" data-name="Path 3" d="M14.613,2.407a3.206,3.206,0,0,0-3.206,3.206H10.125a4.488,4.488,0,0,1,8.976,0H17.819A3.206,3.206,0,0,0,14.613,2.407Z" transform="translate(-3.387)"></path>
+                        </g>
+                    </svg>
+                    <asp:Label ID="cartCountBadge" runat="server" CssClass="cart-count" Visible="false"></asp:Label>
+                </span>
+              </a>
+
+            </div>
+
+             </nav>
+                </header>
+
+    <!-- MAIN CONTENT WITH FORM -->
+ 
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    
+
+            <footer>
+                <div class="footer-container">
+                    <!-- Left Section (Logo) -->
+                    <div class="footer-left">
+                        <img src="images/logo8-without-bg.png" alt="Logo">
+                    </div>
+
+                    <!-- Centered INFO Section -->
+                    <div class="footer-info">
+                        <h3>INFO</h3>
+                        <ul>
+                            <li><a href="About.aspx">About Us</a></li>
+                            <li><a href="PrivacyPolicy.aspx">Privacy Policy</a></li>
+                            <li><a href="OrderAndShipping.aspx">Order & Shipping</a></li>
+                            <li><a href="TermsAndConditions.aspx">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Right Section (Socials) -->
+                    <div class="footer-right">
+                        <h3>OUR SOCIALS</h3>
+                        <div class="footer-socials">
+                            <a href="https://www.linkedin.com/in/baraiyash/" aria-label="LinkedIn">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/baraiyash" aria-label="GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2026, UrbanKicks</p>
+                </div>
+         </footer>
+    </form>
+
+
+</body>
+</html>
